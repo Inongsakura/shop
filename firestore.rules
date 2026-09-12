@@ -1,0 +1,100 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signed() { return request.auth != null; }
+    function admin() { return signed() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function member() { return signed() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.suspended == false; }
+    function owner(uid) { return signed() && request.auth.uid == uid; }
+    function profile(d) {
+      return d.keys().hasOnly(['email','firstName','lastName','phone','wishlist','suspended','createdAt'])
+        && d.email == request.auth.token.email && d.firstName is string && d.firstName.size() > 0 && d.firstName.size() <= 80
+        && d.lastName is string && d.lastName.size() > 0 && d.lastName.size() <= 80
+        && d.phone is string && (d.phone == '' || d.phone.matches('0[0-9]{9}'))
+        && d.wishlist is list && d.wishlist.size() <= 100 && d.suspended == false && d.createdAt is number;
+    }
+    // Role grants are console-only; never trust an email or a browser role field.
+    match /admins/{uid} { allow get: if owner(uid) || admin(); allow list: if admin(); allow write: if false; }
+    match /users/{uid} {
+      allow read: if owner(uid) || admin();
+      allow create: if owner(uid) && profile(request.resource.data);
+      allow update: if admin() || (owner(uid) && member() && profile(request.resource.data)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['firstName','lastName','phone','wishlist']));
+      allow delete: if false;
+    }
+    match /products/{id} { allow read: if resource.data.active == true || admin(); allow write: if admin(); }
+    match /coupons/{id} { allow read: if member() || admin(); allow write: if admin(); }
+    match /payment_settings/{id} {
+      allow read: if member() || admin();
+      allow write: if admin() && id == 'demo'
+        && request.resource.data.keys().hasOnly(['bank','recipient','account','instructions','transfer','qr'])
+        && request.resource.data.bank is string && request.resource.data.bank.size() <= 80
+        && request.resource.data.recipient is string && request.resource.data.recipient.size() <= 80
+        && request.resource.data.account.matches('DEMO-[A-Z-]+') && request.resource.data.account.size() <= 60
+        && request.resource.data.instructions is string && request.resource.data.instructions.size() <= 500
+        && request.resource.data.transfer is bool && request.resource.data.qr is bool
+        && (request.resource.data.transfer || request.resource.data.qr);
+    }
+    function payment(d) {
+      return d.keys().hasOnly(['method','slip','submittedAt','bank','recipient','account'])
+        && d.method in ['transfer','qr'] && d.slip is string && d.slip.size() <= 280000
+        && (d.slip == 'DEMO-GENERATED' || d.slip.matches('data:image/(png|jpeg);base64,[A-Za-z0-9+/=]+'))
+        && d.submittedAt is number && d.submittedAt <= request.time.toMillis() + 60000
+        && d.submittedAt >= request.time.toMillis() - 300000
+        && d.bank is string && d.bank.size() <= 80 && d.recipient is string && d.recipient.size() <= 80
+        && d.account is string && d.account.matches('DEMO-[A-Z-]+') && d.account.size() <= 60;
+    }
+    function line(i) { return i.keys().hasOnly(['gameId','qty','name','platform','unitCents'])
+      && i.gameId is string && i.gameId.matches('[a-zA-Z0-9_-]{1,80}') && i.qty is int && i.qty >= 1 && i.qty <= 10
+      && i.name is string && i.name.size() <= 120 && i.platform is string && i.platform.size() <= 80
+      && i.unitCents is int && i.unitCents >= 0 && i.unitCents <= 100000000; }
+    function at(items, n) { return items.size() <= n || line(items[n]); }
+    function order(d,id) {
+      return d.keys().hasOnly(['requestId','items','subtotalCents','discountCents','totalCents','couponCode','firstName','lastName','phone','email','userId','payment','status','createdAt','expiresAt'])
+        && d.userId == request.auth.uid && d.email == request.auth.token.email
+        && d.requestId is string && d.requestId.matches('[a-zA-Z0-9-]{1,100}') && id == request.auth.uid + '_' + d.requestId
+        && d.payment == 'mock' && d.status == 'pending_payment'
+        && d.items is list && d.items.size() >= 1 && d.items.size() <= 20
+        && at(d.items,0) && at(d.items,1) && at(d.items,2) && at(d.items,3) && at(d.items,4)
+        && at(d.items,5) && at(d.items,6) && at(d.items,7) && at(d.items,8) && at(d.items,9)
+        && at(d.items,10) && at(d.items,11) && at(d.items,12) && at(d.items,13) && at(d.items,14)
+        && at(d.items,15) && at(d.items,16) && at(d.items,17) && at(d.items,18) && at(d.items,19)
+        && d.subtotalCents is int && d.subtotalCents >= 0 && d.subtotalCents <= 20000000000
+        && d.discountCents is int && d.discountCents >= 0 && d.discountCents <= d.subtotalCents
+        && d.totalCents == d.subtotalCents - d.discountCents
+        && d.couponCode is string && d.couponCode.size() <= 30
+        && d.firstName is string && d.firstName.size() <= 80 && d.lastName is string && d.lastName.size() <= 80
+        && d.phone is string && d.phone.size() <= 10
+        && d.createdAt is number && d.createdAt <= request.time.toMillis() + 60000 && d.createdAt >= request.time.toMillis() - 300000
+        && d.expiresAt == d.createdAt + 1800000;
+    }
+    // These are untrusted purchase REQUESTS, not receipts. Only an admin may
+    // fulfil them after recalculating prices and checking stock in a transaction.
+    match /orders/{id} {
+      allow get: if admin() || (signed() && (id.matches(request.auth.uid + '_.*') || owner(resource.data.userId)));
+      allow list: if admin() || (member() && owner(resource.data.userId));
+      allow create: if member() && order(request.resource.data,id);
+      allow update: if admin() || (member() && owner(resource.data.userId)
+        && ((resource.data.status == 'pending_payment' && resource.data.expiresAt > request.time.toMillis() && request.resource.data.status == 'awaiting_review'
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','paymentDetails']) && payment(request.resource.data.paymentDetails))
+        || (resource.data.status in ['pending_payment','awaiting_review'] && request.resource.data.status == 'cancelled'
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']))));
+      allow delete: if false;
+    }
+    match /key_inventory/{id} { allow read, write: if admin(); }
+    match /user_keys/{id} { allow read: if admin() || (member() && owner(resource.data.userId)); allow write: if admin(); }
+    match /ownership/{id} { allow read: if admin() || (member() && owner(resource.data.userId)); allow write: if admin(); }
+    match /reviews/{id} {
+      allow read: if true;
+      allow create, update: if member() && request.resource.data.keys().hasOnly(['userId','gameId','author','rating','comment','createdAt'])
+        && request.resource.data.userId == request.auth.uid && request.resource.data.gameId is string
+        && id == request.auth.uid + '_' + request.resource.data.gameId
+        && exists(/databases/$(database)/documents/ownership/$(id))
+        && request.resource.data.author == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.firstName
+        && request.resource.data.rating is int && request.resource.data.rating >= 1 && request.resource.data.rating <= 5
+        && request.resource.data.comment is string && request.resource.data.comment.size() > 0 && request.resource.data.comment.size() <= 1000
+        && request.resource.data.createdAt is number;
+      allow delete: if admin();
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

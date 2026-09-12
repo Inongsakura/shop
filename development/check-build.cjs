@@ -1,0 +1,11 @@
+const fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const read=p=>fs.readFileSync(__dirname+'/../'+p,'utf8'),html=read('index.html'),source=read('assets/js/app.js');
+new vm.Script(source);
+assert.ok(html.includes('src="assets/js/app.js" defer'));assert.ok(html.includes('href="assets/css/main.css"'));assert.ok(!/type=["']module/.test(html));
+assert.ok(!html.includes('fonts.googleapis.com'));assert.ok(source.includes("PRODUCT_CACHE='inongshop-products-v1'"));assert.ok(source.includes('Promise.all([userRequest,productRequest])'));
+assert.ok(source.includes('const previewCatalog=productLoadedAt===0'));assert.ok(source.includes("el.textContent='กำลังโหลด'"));assert.ok(html.includes('rel="preconnect" href="https://firestore.googleapis.com"'));
+assert.ok(html.includes(crypto.createHash('sha256').update(source).digest('hex')));
+assert.ok(!/OfflineShop\.init|backup-export|admin@shop\.local/.test(source));
+assert.ok(source.includes("db=window.ShopFirestore('default')"));
+assert.ok(read('development/src/storefront.js').includes('p.images?.[0]'));assert.ok(read('assets/placeholder.svg').includes('<svg'));
+console.log('PASS: classic JS/CSS assets, valid JavaScript, build hash, named database and product images');

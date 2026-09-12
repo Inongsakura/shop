@@ -1,0 +1,262 @@
+[
+  {
+    "id": "cp2077",
+    "name": "Cyberpunk 2077",
+    "platform": "PC / Steam",
+    "genre": "Action RPG",
+    "developer": "CD Projekt Red",
+    "price": 1299,
+    "salePrice": 649,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg"
+    ],
+    "desc": "Cyberpunk 2077 เป็นเกม Action RPG แบบ Open-World ที่คุณจะได้สวมบทบาทเป็น V"
+  },
+  {
+    "id": "rdr2",
+    "name": "Red Dead Redemption 2",
+    "platform": "PC / Steam",
+    "genre": "Action Adventure",
+    "developer": "Rockstar Games",
+    "price": 1799,
+    "salePrice": 879,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg"
+    ],
+    "desc": "Red Dead Redemption 2 เรื่องราวของ Arthur Morgan และแก๊ง Van der Linde"
+  },
+  {
+    "id": "gtav",
+    "name": "GTA V Premium Edition",
+    "platform": "PC / Steam",
+    "genre": "Action Adventure",
+    "developer": "Rockstar Games",
+    "price": 899,
+    "salePrice": null,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
+    ],
+    "desc": "GTA V เกม Open-World ที่โด่งดังที่สุดในโลก พร้อม GTA Online"
+  },
+  {
+    "id": "elden",
+    "name": "Elden Ring",
+    "platform": "PC / Steam",
+    "genre": "Action RPG",
+    "developer": "FromSoftware",
+    "price": 1799,
+    "salePrice": 1199,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg"
+    ],
+    "desc": "Elden Ring Action RPG โลกเปิดจากผู้สร้าง Dark Souls"
+  },
+  {
+    "id": "hogwarts",
+    "name": "Hogwarts Legacy",
+    "platform": "PC / Steam",
+    "genre": "Action RPG",
+    "developer": "Avalanche Software",
+    "price": 1799,
+    "salePrice": 1199,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg"
+    ],
+    "desc": "Hogwarts Legacy เกม Action RPG ในโลกพ่อมดแม่มด Harry Potter"
+  },
+  {
+    "id": "gow",
+    "name": "God of War",
+    "platform": "PC / Steam",
+    "genre": "Action Adventure",
+    "developer": "Santa Monica Studio",
+    "price": 1499,
+    "salePrice": 899,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg"
+    ],
+    "desc": "God of War การผจญภัยครั้งใหม่ของ Kratos ในโลกนอร์ส"
+  },
+  {
+    "id": "forza",
+    "name": "Forza Horizon 5",
+    "platform": "PC / Xbox",
+    "genre": "Racing",
+    "developer": "Playground Games",
+    "price": 1799,
+    "salePrice": 1199,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg"
+    ],
+    "desc": "Forza Horizon 5 เกมแข่งรถ Open-World ที่สวยงามที่สุด"
+  },
+  {
+    "id": "fc24",
+    "name": "EA SPORTS FC 24",
+    "platform": "PC / PlayStation / Xbox",
+    "genre": "Sports",
+    "developer": "EA Sports",
+    "price": 2199,
+    "salePrice": 1099,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/2195250/header.jpg"
+    ],
+    "desc": "EA SPORTS FC 24 เกมฟุตบอลที่สมจริงที่สุดจาก EA Sports"
+  },
+  {
+    "id": "palworld",
+    "name": "Palworld",
+    "platform": "PC / Steam",
+    "genre": "Survival",
+    "developer": "Pocketpair",
+    "price": 529,
+    "salePrice": null,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1623730/header.jpg"
+    ],
+    "desc": "Palworld เกมเอาตัวรอดจับสัตว์ประหลาดในโลก Open-World"
+  },
+  {
+    "id": "stellarblade",
+    "name": "Stellar Blade",
+    "platform": "PlayStation",
+    "genre": "Action",
+    "developer": "Shift Up",
+    "price": 2490,
+    "salePrice": 1990,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/3489700/header.jpg"
+    ],
+    "desc": "Stellar Blade เกม Action สวยจากทีมผู้สร้าง Goddess of Victory: NIKKE"
+  },
+  {
+    "id": "ff7rebirth",
+    "name": "Final Fantasy VII Rebirth",
+    "platform": "PC / PlayStation",
+    "genre": "RPG",
+    "developer": "Square Enix",
+    "price": 2490,
+    "salePrice": 1990,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/2909400/header.jpg"
+    ],
+    "desc": "Final Fantasy VII Rebirth การผจญภัยครั้งใหม่ของ Cloud และพรรคพวก"
+  },
+  {
+    "id": "blackmyth",
+    "name": "Black Myth: Wukong",
+    "platform": "PC / Steam",
+    "genre": "Action RPG",
+    "developer": "Game Science",
+    "price": 1490,
+    "salePrice": 1190,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg"
+    ],
+    "desc": "Black Myth: Wukong เกม Action RPG จากนิยายจีนไซอิ๋ว"
+  },
+  {
+    "id": "baldursgate3",
+    "name": "Baldur's Gate 3",
+    "platform": "PC / Steam",
+    "genre": "RPG",
+    "developer": "Larian Studios",
+    "price": 1799,
+    "salePrice": 1399,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/header.jpg"
+    ],
+    "desc": "Baldur's Gate 3 เกม RPG แบบ Turn-Based ระดับรางวัล Game of the Year"
+  },
+  {
+    "id": "starfield",
+    "name": "Starfield",
+    "platform": "PC / Steam",
+    "genre": "RPG",
+    "developer": "Bethesda",
+    "price": 2490,
+    "salePrice": 1790,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg"
+    ],
+    "desc": "Starfield เกม RPG โลกเปิดในอวกาศจากผู้สร้าง Skyrim"
+  },
+  {
+    "id": "diablo4",
+    "name": "Diablo IV",
+    "platform": "PC / Steam",
+    "genre": "Action RPG",
+    "developer": "Blizzard",
+    "price": 1990,
+    "salePrice": 990,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/2344520/header.jpg"
+    ],
+    "desc": "Diablo IV เกม Action RPG แบบ Hack and Slash สุดมันส์"
+  },
+  {
+    "id": "liesp",
+    "name": "Lies of P",
+    "platform": "PC / Steam",
+    "genre": "Action RPG",
+    "developer": "Neowiz",
+    "price": 1790,
+    "salePrice": 1190,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1627720/header.jpg"
+    ],
+    "desc": "Lies of P เกม Action RPG แนว Soul-like ที่ดัดแปลงจากนิยายพินอคคิโอ"
+  },
+  {
+    "id": "streetfighter6",
+    "name": "Street Fighter 6",
+    "platform": "PC / PlayStation / Xbox",
+    "genre": "Fighting",
+    "developer": "Capcom",
+    "price": 1990,
+    "salePrice": 1490,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1222940/header.jpg"
+    ],
+    "desc": "Street Fighter 6 เกมต่อสู้คลาสสิกภาคใหม่ล่าสุด"
+  },
+  {
+    "id": "armoredcore6",
+    "name": "Armored Core VI",
+    "platform": "PC / Steam",
+    "genre": "Action",
+    "developer": "FromSoftware",
+    "price": 1990,
+    "salePrice": 1490,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1888160/header.jpg"
+    ],
+    "desc": "Armored Core VI เกมหุ่นยนต์ต่อสู้จาก FromSoftware"
+  },
+  {
+    "id": "tekken8",
+    "name": "Tekken 8",
+    "platform": "PC / PlayStation / Xbox",
+    "genre": "Fighting",
+    "developer": "Bandai Namco",
+    "price": 2190,
+    "salePrice": 1690,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1781400/header.jpg"
+    ],
+    "desc": "Tekken 8 เกมต่อสู้ในตำนานภาคใหม่ กราฟิกสวยที่สุดในซีรีส์"
+  },
+  {
+    "id": "dave",
+    "name": "Dave the Diver",
+    "platform": "PC / Steam",
+    "genre": "Adventure",
+    "developer": "MINTROCKET",
+    "price": 359,
+    "salePrice": 289,
+    "images": [
+      "https://cdn.cloudflare.steamstatic.com/steam/apps/1868140/header.jpg"
+    ],
+    "desc": "Dave the Diver เกมผจญภัยดำน้ำหาปลาแล้วเปิดร้านซูชิ สุดน่ารัก"
+  }
+]

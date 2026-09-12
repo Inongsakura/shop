@@ -1,0 +1,10 @@
+{
+  "name": "inongshop-local-firebase",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {"build":"node build.cjs && node check-sdk.cjs && node check-build.cjs","test":"node --test test.cjs","test:ui":"node --test test-ui.cjs"},
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "firebase": "^12.18.0"
+  }
+}
